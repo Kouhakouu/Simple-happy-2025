@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2025</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <header class="tabs">
+        <div class="speaker" id="speaker">
+            🔊
+        </div>
+        <div class="tab active" data-target="home">Home</div>
+        <div class="tab" data-target="highlights">Highlights</div>
+        <div class="tab" data-target="wishes">Wishes</div>
+        <div class="tab" data-target="contact">Contact</div>
+    </header>
+
+    <main class="main">
+        <section class="hero section" id="home">
+            <canvas id="fireworksCanvas"></canvas>
+            <h1 class="hero__title">Welcome to 2025!</h1>
+            <p class="hero__subtitle">A year full of possibilities.</p>
+            <button class="button" onclick="switchTab('wishes')">Make a Wish</button>
+        </section>
+
+        <section class="highlights section" id="highlights">
+            <h2>2024 Highlights</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/61JHONRXhjs">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="wishes section" id="wishes">
+            <h2 class="section__title">Make a Wish for 2025</h2>
+            <div class="wishes__container">
+                <p id="wish-display">Press the button to get your wish!</p>
+                <button class="button" onclick="generateWish()">Generate Wish</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>https://github.com/Kouhakouu</p>
+    </footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-target');
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        function switchTab(target) {
+            document.querySelector(`.tab[data-target="${target}"]`).click();
+        }
+        function generateWish() {
+            const wishes = [
+                "Success and happiness await you!",
+                "May all your dreams come true in 2025!",
+                "This year will be your best yet!",
+                "Health, wealth, and joy for you in 2025!",
+                "New opportunities are just around the corner!"
+            ];
+            const wish = wishes[Math.floor(Math.random() * wishes.length)];
+            document.getElementById('wish-display').textContent = wish;
+        }
+
+        const speakerIcon = document.getElementById('speaker');
+        const audio = new Audio('y2mate.com - ABBA  Happy New Year Video.mp3');
+
+        let isPlaying = false;
+
+        speakerIcon.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                speakerIcon.textContent = '🔇';
+            } else {
+                audio.play();
+                speakerIcon.textContent = '🔊';
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+    <iframe src="y2mate.com - ABBA  Happy New Year Video.mp3" id="audio" style="display: none"></iframe>
+</body>
+
+</html>
